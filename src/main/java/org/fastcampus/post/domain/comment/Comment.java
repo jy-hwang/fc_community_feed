@@ -35,4 +35,12 @@ public class Comment {
   public void unlike() {
     likeCounter.decrease();
   }
+
+  public void updateComment(User user, String updatedComment){
+    if (!this.author.equals(user)) {
+      throw new IllegalArgumentException();
+    }
+
+    this.content.updateContent(updatedComment);
+  }
 }

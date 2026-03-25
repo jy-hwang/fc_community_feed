@@ -5,7 +5,6 @@ import org.fastcampus.post.domain.content.PostContent;
 import org.fastcampus.user.domain.User;
 
 public class Post {
-  //private final User author;
   private final Long id;
   private final User author;
   private final PostContent content;
@@ -32,6 +31,14 @@ public class Post {
 
   public void unlike() {
     likeCounter.decrease();
+  }
+
+  public void updatePost(User user, String updateContent) {
+    if (!this.author.equals(user)) {
+      throw new IllegalArgumentException();
+    }
+
+    this.content.updateContent(updateContent);
   }
 
 }
