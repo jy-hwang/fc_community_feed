@@ -7,8 +7,8 @@ import java.util.Objects;
 public class User {
   private final Long id;
   private final UserInfo info;
-  private final PositiveIntegerCounter followingCount;
-  private final PositiveIntegerCounter followerCount;
+  private final PositiveIntegerCounter followingCounter;
+  private final PositiveIntegerCounter followerCounter;
 
   public User(Long id, UserInfo userInfo) {
     if(userInfo == null) {
@@ -17,8 +17,8 @@ public class User {
 
     this.id = id;
     this.info = userInfo;
-    this.followingCount = new PositiveIntegerCounter();
-    this.followerCount = new PositiveIntegerCounter();
+    this.followingCounter = new PositiveIntegerCounter();
+    this.followerCounter = new PositiveIntegerCounter();
   }
 
   public void follow(User targetUser) {
@@ -26,7 +26,7 @@ public class User {
       throw new IllegalArgumentException();
     }
 
-    followingCount.increase();
+    followingCounter.increase();
     //targetUser.followerCount.increase();
     targetUser.increaseFollowerCount();
   }
@@ -36,17 +36,17 @@ public class User {
       throw new IllegalArgumentException();
     }
 
-    followingCount.decrease();
+    followingCounter.decrease();
     //targetUser.followerCount.decrease();
     targetUser.decreaseFollowerCount();
   }
 
   private void increaseFollowerCount() {
-    followerCount.increase();
+    followerCounter.increase();
   }
 
   private void decreaseFollowerCount() {
-    followerCount.decrease();
+    followerCounter.decrease();
   }
 
   @Override
@@ -61,5 +61,17 @@ public class User {
   @Override
   public int hashCode() {
     return Objects.hashCode(id);
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public int followerCount(){
+    return followerCounter.getCount();
+  }
+
+  public int followingCount(){
+    return followingCounter.getCount();
   }
 }
