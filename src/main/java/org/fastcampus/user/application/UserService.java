@@ -18,4 +18,8 @@ public class UserService {
     User user = new User(null, info);
     return user;
   }
+
+  public User getUser(Long id){
+    return userRepository.findById(id).orElseThrow(IllegalArgumentException::new);
+  }
 }
