@@ -6,7 +6,7 @@ import org.fastcampus.user.domain.User;
 import org.fastcampus.user.domain.UserInfo;
 
 public class UserService {
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
 
   public UserService(UserRepository userRepository) {
     this.userRepository = userRepository;
@@ -16,7 +16,7 @@ public class UserService {
     UserInfo info = new UserInfo(dto.name(), dto.profileImageUrl());
 
     User user = new User(null, info);
-    return user;
+    return userRepository.save(user);
   }
 
   public User getUser(Long id){
