@@ -62,4 +62,32 @@ public class UserRelationServiceTest {
     // when & then
     assertThrows(IllegalArgumentException.class, () -> userRelationService.follow(sameUser));
   }
+
+  @Test
+  void givenCreateTwoUserFollow_whenUnfollow_thenUserUnfollowSaved() {
+    // given
+    userRelationService.follow(requestDto);
+
+    // when
+    userRelationService.unfollow(requestDto);
+
+    // then
+    assertEquals(0, user1.followingCount());
+    assertEquals(0, user2.followerCount());
+  }
+
+  @Test
+  void givenCreateTwoUser_whenUnfollow_thenUserThrowError() {
+    // when & then
+    assertThrows(IllegalArgumentException.class, () -> userRelationService.unfollow(requestDto));
+  }
+
+  @Test
+  void givenCreateOneUser_whenUnfollowSelf_thenUserThrowError() {
+    // given
+    FollowUserRequestDto sameUser = new FollowUserRequestDto(user1.getId(), user1.getId());
+
+    // when & then
+    assertThrows(IllegalArgumentException.class, () -> userRelationService.unfollow(sameUser));
+  }
 }
