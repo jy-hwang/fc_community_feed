@@ -1,6 +1,7 @@
 package org.fastcampus.post.application;
 
 import org.fastcampus.post.application.dto.CreatePostRequestDto;
+import org.fastcampus.post.application.dto.UpdatePostRequestDto;
 import org.fastcampus.post.application.interfaces.PostRepository;
 import org.fastcampus.post.domain.Post;
 import org.fastcampus.user.application.UserService;
@@ -24,6 +25,14 @@ public class PostService {
     User author = userService.getUser(dto.userId());
     Post post = Post.createPost(null, author, dto.content(), dto.state());
 
+    return postRepository.save(post);
+  }
+
+  public Post updatePost(Long id, UpdatePostRequestDto dto) {
+    Post post = getPost(id);
+    User user = userService.getUser(dto.userId());
+
+    post.updatePost(user, dto.content(), dto.state());
     return postRepository.save(post);
   }
 }
