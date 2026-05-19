@@ -1,18 +1,22 @@
 package org.fastcampus.post.domain;
 
 import org.fastcampus.common.domain.PositiveIntegerCounter;
-import org.fastcampus.post.domain.content.PostContent;
+import org.fastcampus.post.domain.content.Content;
 import org.fastcampus.post.domain.content.PostPublicationState;
 import org.fastcampus.user.domain.User;
 
 public class Post {
   private final Long id;
   private final User author;
-  private final PostContent content;
+  private final Content content;
   private final PositiveIntegerCounter likeCounter;
   private PostPublicationState state;
 
-  public Post(Long id, User author, PostContent content) {
+  public Post(long id, User author, Content content) {
+    this(id, author, content, PostPublicationState.PUBLIC);
+  }
+
+  public Post(Long id, User author, Content content, PostPublicationState state) {
     if (author == null) {
       throw new IllegalArgumentException();
     }
@@ -21,7 +25,7 @@ public class Post {
     this.author = author;
     this.content = content;
     this.likeCounter = new PositiveIntegerCounter();
-    this.state = PostPublicationState.PUBLIC;
+    this.state = state;
   }
 
   public void like(User user) {
@@ -45,4 +49,7 @@ public class Post {
     this.content.updateContent(updateContent);
   }
 
+  public int getLikeCounter() {
+    return likeCounter.getCount();
+  }
 }
