@@ -2,6 +2,7 @@ package org.fastcampus.post.domain;
 
 import org.fastcampus.common.domain.PositiveIntegerCounter;
 import org.fastcampus.post.domain.content.Content;
+import org.fastcampus.post.domain.content.PostContent;
 import org.fastcampus.post.domain.content.PostPublicationState;
 import org.fastcampus.user.domain.User;
 
@@ -11,6 +12,14 @@ public class Post {
   private final Content content;
   private final PositiveIntegerCounter likeCounter;
   private PostPublicationState state;
+
+  public static Post createPost(Long id, User author, String content, PostPublicationState state) {
+    return new Post(id, author, new PostContent(content), state);
+  }
+
+  public static Post createDefaultPost(Long id, User author, String content) {
+    return new Post(id, author, new PostContent(content), PostPublicationState.PUBLIC);
+  }
 
   public Post(long id, User author, Content content) {
     this(id, author, content, PostPublicationState.PUBLIC);
