@@ -30,5 +30,13 @@ public class CommentService {
     Comment comment = Comment.createComment(post, user, dto.content());
     return commentRepository.save(comment);
   }
+
+  public Comment updateComment(UpdateCommentRequestDto dto) {
+    Comment comment = getComment(dto.commentId());
+    User user = userService.getUser(dto.userId());
+
+    comment.updateComment(user, dto.content());
+    return commentRepository.save(comment);
+  }
 }
 
