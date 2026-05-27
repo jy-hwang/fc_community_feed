@@ -1,7 +1,7 @@
 package org.fastcampus.post.application;
 
 import org.fastcampus.post.application.dto.CreatePostRequestDto;
-import org.fastcampus.post.application.dto.LikePostRequestDto;
+import org.fastcampus.post.application.dto.LikeRequestDto;
 import org.fastcampus.post.application.dto.UpdatePostRequestDto;
 import org.fastcampus.post.application.interfaces.LikeRepository;
 import org.fastcampus.post.application.interfaces.PostRepository;
@@ -41,8 +41,8 @@ public class PostService {
     return postRepository.save(post);
   }
 
-  public void likePost(LikePostRequestDto dto) {
-    Post post = getPost(dto.postId());
+  public void likePost(LikeRequestDto dto) {
+    Post post = getPost(dto.targetId());
     User user = userService.getUser(dto.userId());
 
     if (likeRepository.checkLike(post, user)) {
@@ -53,8 +53,8 @@ public class PostService {
     likeRepository.like(post, user);
   }
 
-  public void unlikePost(LikePostRequestDto dto) {
-    Post post = getPost(dto.postId());
+  public void unlikePost(LikeRequestDto dto) {
+    Post post = getPost(dto.targetId());
     User user = userService.getUser(dto.userId());
 
     if (likeRepository.checkLike(post, user)) {
