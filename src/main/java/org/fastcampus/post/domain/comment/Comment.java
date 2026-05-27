@@ -2,6 +2,7 @@ package org.fastcampus.post.domain.comment;
 
 import org.fastcampus.common.domain.PositiveIntegerCounter;
 import org.fastcampus.post.domain.Post;
+import org.fastcampus.post.domain.content.CommentContent;
 import org.fastcampus.post.domain.content.Content;
 import org.fastcampus.user.domain.User;
 
@@ -11,6 +12,10 @@ public class Comment {
   private final User author;
   private final Content content;
   private final PositiveIntegerCounter likeCounter;
+
+  public static Comment createComment(Post post, User author, String content) {
+    return new Comment(null, post, author, new CommentContent(content));
+  }
 
   public Comment(Long id, Post post, User author, Content content) {
     if (author == null) throw new IllegalArgumentException();
@@ -36,7 +41,7 @@ public class Comment {
     likeCounter.decrease();
   }
 
-  public void updateComment(User user, String updatedComment){
+  public void updateComment(User user, String updatedComment) {
     if (!this.author.equals(user)) {
       throw new IllegalArgumentException();
     }
