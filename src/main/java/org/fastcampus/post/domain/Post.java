@@ -61,4 +61,20 @@ public class Post {
   public int getLikeCounter() {
     return likeCounter.getCount();
   }
+
+  public String getContent() {
+    return content.getContentText();
+  }
+
+  public Long getId() {
+    return id;
+  }
+
+  public User getAuthor() {
+    return author;
+  }
+
+  public Content getContentObject(){
+    return content;
+  }
 }
