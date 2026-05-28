@@ -2,6 +2,7 @@ package org.fastcampus.post.application;
 
 import org.fastcampus.fake.FakeObjectFactory;
 import org.fastcampus.post.application.dto.CreatePostRequestDto;
+import org.fastcampus.post.application.dto.UpdatePostRequestDto;
 import org.fastcampus.post.domain.Post;
 import org.fastcampus.post.domain.content.PostPublicationState;
 import org.fastcampus.user.application.UserService;
@@ -20,6 +21,7 @@ public class PostServiceTest {
 
   private CreatePostRequestDto dto = new CreatePostRequestDto(user.getId(), "this is test Content", PostPublicationState.PUBLIC);
 
+
   @Test
   void givenPostRequestDto_whenCreate_thenReturnPost() {
     // when
@@ -28,5 +30,21 @@ public class PostServiceTest {
     // then
     Post post = postService.getPost(savedPost.getId());
     assertEquals(savedPost, post);
+  }
+
+  @Test
+  void givenCreatePost_whenUpdate_thenReturnUpdatedPost() {
+    // given
+    Post savedPost = postService.createPost(dto);
+    UpdatePostRequestDto updateDto
+        = new UpdatePostRequestDto(savedPost.getId(), savedPost.getAuthor().getId(), "this is updated content", PostPublicationState.PUBLIC);
+
+    // when
+    Post updatedPost = postService.updatePost(savedPost.getId(), updateDto);
+
+    // then
+    assertEquals(savedPost.getId(), updatedPost.getId());
+    assertEquals(savedPost.getAuthor(), updatedPost.getAuthor());
+    assertEquals(savedPost.getContent(), updatedPost.getContent());
   }
 }
