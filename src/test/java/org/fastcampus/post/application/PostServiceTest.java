@@ -2,10 +2,14 @@ package org.fastcampus.post.application;
 
 import org.fastcampus.fake.FakeObjectFactory;
 import org.fastcampus.post.application.dto.CreatePostRequestDto;
+import org.fastcampus.post.domain.Post;
 import org.fastcampus.post.domain.content.PostPublicationState;
 import org.fastcampus.user.application.UserService;
 import org.fastcampus.user.application.dto.CreateUserRequestDto;
 import org.fastcampus.user.domain.User;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PostServiceTest {
   private final UserService userService = FakeObjectFactory.getUserService();
@@ -15,4 +19,14 @@ public class PostServiceTest {
   private final User otherUser = userService.createUser(new CreateUserRequestDto("user1", null));
 
   private CreatePostRequestDto dto = new CreatePostRequestDto(user.getId(), "this is test Content", PostPublicationState.PUBLIC);
+
+  @Test
+  void givenPostRequestDto_whenCreate_thenReturnPost() {
+    // when
+    Post savedPost = postService.createPost(dto);
+
+    // then
+    Post post = postService.getPost(savedPost.getId());
+    assertEquals(savedPost, post);
+  }
 }
