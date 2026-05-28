@@ -75,4 +75,18 @@ public class PostServiceTest {
     // then
     assertEquals(1, savedPost.getLikeCounter());
   }
+
+  @Test
+  void givenCreatePost_whenUnliked_thenReturnPostWithoutLike() {
+    // given
+    Post savedPost = postService.createPost(dto);
+
+    // when
+    LikeRequestDto likeRequestDto = new LikeRequestDto(savedPost.getId(), otherUser.getId());
+    postService.likePost(likeRequestDto);
+    postService.unlikePost(likeRequestDto);
+
+    // then
+    assertEquals(0, savedPost.getLikeCounter());
+  }
 }
