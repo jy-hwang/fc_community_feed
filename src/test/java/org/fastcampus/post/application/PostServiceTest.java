@@ -2,6 +2,7 @@ package org.fastcampus.post.application;
 
 import org.fastcampus.fake.FakeObjectFactory;
 import org.fastcampus.post.application.dto.CreatePostRequestDto;
+import org.fastcampus.post.application.dto.LikeRequestDto;
 import org.fastcampus.post.application.dto.UpdatePostRequestDto;
 import org.fastcampus.post.domain.Post;
 import org.fastcampus.post.domain.content.PostPublicationState;
@@ -46,5 +47,32 @@ public class PostServiceTest {
     assertEquals(savedPost.getId(), updatedPost.getId());
     assertEquals(savedPost.getAuthor(), updatedPost.getAuthor());
     assertEquals(savedPost.getContent(), updatedPost.getContent());
+  }
+
+  @Test
+  void givenCreatePost_whenLiked_thenReturnPostWithLike() {
+    // given
+    Post savedPost = postService.createPost(dto);
+
+    // when
+    LikeRequestDto likeRequestDto = new LikeRequestDto(savedPost.getId(), otherUser.getId());
+    postService.likePost(likeRequestDto);
+
+    // then
+    assertEquals(1, savedPost.getLikeCounter());
+  }
+
+  @Test
+  void givenCreatePost_whenLikedTwice_thenReturnPostWithLike() {
+    // given
+    Post savedPost = postService.createPost(dto);
+
+    // when
+    LikeRequestDto likeRequestDto = new LikeRequestDto(savedPost.getId(), otherUser.getId());
+    postService.likePost(likeRequestDto);
+    postService.likePost(likeRequestDto);
+
+    // then
+    assertEquals(1, savedPost.getLikeCounter());
   }
 }
