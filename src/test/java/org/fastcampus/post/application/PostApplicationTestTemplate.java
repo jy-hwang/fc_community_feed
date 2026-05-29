@@ -15,6 +15,6 @@ public class PostApplicationTestTemplate {
   final User user = userService.createUser(new CreateUserRequestDto("user1", null));
   final User otherUser = userService.createUser(new CreateUserRequestDto("user1", null));
 
-  final CreatePostRequestDto dto = new CreatePostRequestDto(user.getId(), "this is test Content", PostPublicationState.PUBLIC);
-  final Post post = postService.createPost(dto);
+  CreatePostRequestDto postRequestDto = new CreatePostRequestDto(user.getId(), "this is test Content", PostPublicationState.PUBLIC);
+  final Post post = postService.createPost(postRequestDto);
 }

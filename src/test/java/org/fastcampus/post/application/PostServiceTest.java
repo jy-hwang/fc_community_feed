@@ -13,7 +13,7 @@ public class PostServiceTest extends PostApplicationTestTemplate {
   @Test
   void givenPostRequestDto_whenCreate_thenReturnPost() {
     // when
-    Post savedPost = postService.createPost(dto);
+    Post savedPost = postService.createPost(postRequestDto);
 
     // then
     Post post = postService.getPost(savedPost.getId());
@@ -23,7 +23,7 @@ public class PostServiceTest extends PostApplicationTestTemplate {
   @Test
   void givenCreatePost_whenUpdate_thenReturnUpdatedPost() {
     // given
-    Post savedPost = postService.createPost(dto);
+    Post savedPost = postService.createPost(postRequestDto);
     UpdatePostRequestDto updateDto
         = new UpdatePostRequestDto(savedPost.getId(), savedPost.getAuthor().getId(), "this is updated content", PostPublicationState.PUBLIC);
 
@@ -39,7 +39,7 @@ public class PostServiceTest extends PostApplicationTestTemplate {
   @Test
   void givenCreatePost_whenLiked_thenReturnPostWithLike() {
     // given
-    Post savedPost = postService.createPost(dto);
+    Post savedPost = postService.createPost(postRequestDto);
 
     // when
     LikeRequestDto likeRequestDto = new LikeRequestDto(savedPost.getId(), otherUser.getId());
@@ -52,7 +52,7 @@ public class PostServiceTest extends PostApplicationTestTemplate {
   @Test
   void givenCreatePost_whenLikedTwice_thenReturnPostWithLike() {
     // given
-    Post savedPost = postService.createPost(dto);
+    Post savedPost = postService.createPost(postRequestDto);
 
     // when
     LikeRequestDto likeRequestDto = new LikeRequestDto(savedPost.getId(), otherUser.getId());
@@ -66,7 +66,7 @@ public class PostServiceTest extends PostApplicationTestTemplate {
   @Test
   void givenCreatePostLiked_whenUnliked_thenReturnPostWithoutLike() {
     // given
-    Post savedPost = postService.createPost(dto);
+    Post savedPost = postService.createPost(postRequestDto);
     LikeRequestDto likeRequestDto = new LikeRequestDto(savedPost.getId(), otherUser.getId());
     postService.likePost(likeRequestDto);
 
@@ -80,7 +80,7 @@ public class PostServiceTest extends PostApplicationTestTemplate {
   @Test
   void givenCreatePost_whenUnliked_thenReturnPostWithoutLike() {
     // given
-    Post savedPost = postService.createPost(dto);
+    Post savedPost = postService.createPost(postRequestDto);
 
     // when
     LikeRequestDto likeRequestDto = new LikeRequestDto(savedPost.getId(), otherUser.getId());
