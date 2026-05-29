@@ -53,7 +53,7 @@ public class Comment {
     return likeCounter.getCount();
   }
 
-  private String getContent() {
+  public String getContent() {
     return content.getContentText();
   }
 

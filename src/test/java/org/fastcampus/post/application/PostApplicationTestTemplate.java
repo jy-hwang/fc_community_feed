@@ -1,6 +1,7 @@
 package org.fastcampus.post.application;
 
 import org.fastcampus.fake.FakeObjectFactory;
+import org.fastcampus.post.application.dto.CreateCommentRequestDto;
 import org.fastcampus.post.application.dto.CreatePostRequestDto;
 import org.fastcampus.post.domain.Post;
 import org.fastcampus.post.domain.content.PostPublicationState;
@@ -18,4 +19,7 @@ public class PostApplicationTestTemplate {
 
   CreatePostRequestDto postRequestDto = new CreatePostRequestDto(user.getId(), "this is test Content", PostPublicationState.PUBLIC);
   final Post post = postService.createPost(postRequestDto);
+
+  final String commentContentText = "this is test Comment Content";
+  CreateCommentRequestDto commentRequestDto = new CreateCommentRequestDto(post.getId(), user.getId(), commentContentText);
 }
