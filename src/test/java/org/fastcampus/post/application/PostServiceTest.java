@@ -20,8 +20,7 @@ public class PostServiceTest {
   private final User user = userService.createUser(new CreateUserRequestDto("user1", null));
   private final User otherUser = userService.createUser(new CreateUserRequestDto("user1", null));
 
-  private CreatePostRequestDto dto = new CreatePostRequestDto(user.getId(), "this is test Content", PostPublicationState.PUBLIC);
-
+  private final CreatePostRequestDto dto = new CreatePostRequestDto(user.getId(), "this is test Content", PostPublicationState.PUBLIC);
 
   @Test
   void givenPostRequestDto_whenCreate_thenReturnPost() {

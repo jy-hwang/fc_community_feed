@@ -12,7 +12,7 @@ public class FakeCommentRepository implements CommentRepository {
 
   @Override
   public Comment save(Comment comment) {
-    if(comment.getId() != null) {
+    if (comment.getId() != null) {
       store.put(comment.getId(), comment);
       return comment;
     }
