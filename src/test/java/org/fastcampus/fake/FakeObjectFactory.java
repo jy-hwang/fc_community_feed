@@ -49,4 +49,8 @@ public class FakeObjectFactory {
 
     return postService;
   }
+
+  public static CommentService getCommentService() {
+    return commentService;
+  }
 }

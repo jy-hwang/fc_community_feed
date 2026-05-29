@@ -11,6 +11,7 @@ import org.fastcampus.user.domain.User;
 public class PostApplicationTestTemplate {
   final UserService userService = FakeObjectFactory.getUserService();
   final PostService postService = FakeObjectFactory.getPostService();
+  final CommentService commentService = FakeObjectFactory.getCommentService();
 
   final User user = userService.createUser(new CreateUserRequestDto("user1", null));
   final User otherUser = userService.createUser(new CreateUserRequestDto("user1", null));
