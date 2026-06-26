@@ -79,10 +79,10 @@ public class User extends TimeBaseEntity {
   }
 
   public String getProfileImage() {
-    return info.getProfileImageUrl();
+    return info.profileImageUrl();
   }
 
   public String getName() {
-    return info.getName();
+    return info.name();
   }
 }
