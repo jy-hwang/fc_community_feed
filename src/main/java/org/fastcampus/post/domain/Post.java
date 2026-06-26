@@ -72,7 +72,7 @@ public class Post {
     return content.getContentText();
   }
 
-  public Content getContentObject(){
+  public Content getContentObject() {
     return content;
   }
 }
