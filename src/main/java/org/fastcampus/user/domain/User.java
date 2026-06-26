@@ -4,13 +4,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import org.fastcampus.common.domain.PositiveIntegerCounter;
+import org.fastcampus.common.repository.entity.TimeBaseEntity;
 
 import java.util.Objects;
 
 @Getter
 @AllArgsConstructor
 @Builder
-public class User {
+public class User extends TimeBaseEntity {
   private Long id;
   private UserInfo info;
   private PositiveIntegerCounter followingCounter;
