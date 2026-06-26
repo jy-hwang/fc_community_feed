@@ -58,7 +58,7 @@ public class Post {
     this.content.updateContent(updateContent);
   }
 
-  public int getLikeCounter() {
+  public int getLikeCount() {
     return likeCounter.getCount();
   }
 
