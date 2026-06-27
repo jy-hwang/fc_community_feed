@@ -20,7 +20,7 @@ public class CommentServiceTest extends PostApplicationTestTemplate {
   }
 
   @Test
-  void givenCreateComment_whenUpdateCommment_thenReturnUpdatedComment() {
+  void givenCreateComment_whenUpdateComment_thenReturnUpdatedComment() {
     // given
     Comment comment = commentService.createComment(commentRequestDto);
 
