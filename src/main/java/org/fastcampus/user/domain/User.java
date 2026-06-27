@@ -1,14 +1,21 @@
 package org.fastcampus.user.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
 import org.fastcampus.common.domain.PositiveIntegerCounter;
+import org.fastcampus.common.repository.entity.TimeBaseEntity;
 
 import java.util.Objects;
 
-public class User {
-  private final Long id;
-  private final UserInfo info;
-  private final PositiveIntegerCounter followingCounter;
-  private final PositiveIntegerCounter followerCounter;
+@Getter
+@AllArgsConstructor
+@Builder
+public class User extends TimeBaseEntity {
+  private Long id;
+  private UserInfo info;
+  private PositiveIntegerCounter followingCounter;
+  private PositiveIntegerCounter followerCounter;
 
   public User(Long id, UserInfo userInfo) {
     if (userInfo == null) {
@@ -63,10 +70,6 @@ public class User {
     return Objects.hashCode(id);
   }
 
-  public Long getId() {
-    return id;
-  }
-
   public int followerCount() {
     return followerCounter.getCount();
   }
@@ -75,7 +78,11 @@ public class User {
     return followingCounter.getCount();
   }
 
-  public UserInfo getInfo() {
-    return info;
+  public String getProfileImage() {
+    return info.profileImageUrl();
+  }
+
+  public String getName() {
+    return info.name();
   }
 }

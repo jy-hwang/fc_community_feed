@@ -24,6 +24,6 @@ public class UserServiceTest {
     UserInfo userInfo = foundUser.getInfo();
 
     assertEquals(foundUser.getId(), savedUser.getId());
-    assertEquals("test", userInfo.getName());
+    assertEquals("test", userInfo.name());
   }
 }

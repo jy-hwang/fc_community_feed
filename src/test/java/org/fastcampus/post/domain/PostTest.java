@@ -22,7 +22,7 @@ class PostTest {
     post1.like(user2);
 
     // then
-    assertEquals(1, post1.getLikeCounter());
+    assertEquals(1, post1.getLikeCount());
   }
 
   @Test
@@ -40,7 +40,7 @@ class PostTest {
     post1.unlike();
 
     // then
-    assertEquals(0, post1.getLikeCounter());
+    assertEquals(0, post1.getLikeCount());
   }
 
   @Test
@@ -49,6 +49,6 @@ class PostTest {
     post1.unlike();
 
     // then
-    assertEquals(0, post1.getLikeCounter());
+    assertEquals(0, post1.getLikeCount());
   }
 }
