@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.fastcampus.user.application.dto.GetUserListResponseDto;
 import org.fastcampus.user.repository.entity.QUserEntity;
 import org.fastcampus.user.repository.entity.QUserRelationEntity;
-import org.springframework.expression.spel.ast.Projection;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -19,7 +18,7 @@ public class JpaUserListPagingQueryRepository {
   private static final QUserEntity user = QUserEntity.userEntity;
   private static final QUserRelationEntity relation = QUserRelationEntity.userRelationEntity;
 
-  public List<GetUserListResponseDto> getFollowerList(Long userId, Long lastFollowerId){
+  public List<GetUserListResponseDto> getFollowerList(Long userId, Long lastFollowerId) {
     return jpaQueryFactory
         .select(
             Projections.fields(
@@ -34,8 +33,8 @@ public class JpaUserListPagingQueryRepository {
         .fetch();
   }
 
-  private BooleanExpression hasLastData(Long lastId){
-    if(lastId == null){
+  private BooleanExpression hasLastData(Long lastId) {
+    if (lastId == null) {
       return null;
     }
 

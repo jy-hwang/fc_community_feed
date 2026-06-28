@@ -8,17 +8,17 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface JpaUserListQueryRepository extends JpaRepository<UserEntity, Long> {
-  @Query(value=" SELECT new org.fastcampus.user.application.dto.GetUserListResponseDto(ue.name, ue.profileImage) " +
+  @Query(value = " SELECT new org.fastcampus.user.application.dto.GetUserListResponseDto(ue.name, ue.profileImage) " +
       " FROM UserRelationEntity ure " +
       " INNER JOIN UserEntity ue" +
-      " ON ure.followerUserId = ue.id"+
+      " ON ure.followerUserId = ue.id" +
       " WHERE ure.followingUserId = :userId")
   List<GetUserListResponseDto> getFollowingUserList(Long userId);
 
-  @Query(value=" SELECT new org.fastcampus.user.application.dto.GetUserListResponseDto(ue.name, ue.profileImage) " +
+  @Query(value = " SELECT new org.fastcampus.user.application.dto.GetUserListResponseDto(ue.name, ue.profileImage) " +
       " FROM UserRelationEntity ure " +
       " INNER JOIN UserEntity ue" +
-      " ON ure.followingUserId = ue.id"+
+      " ON ure.followingUserId = ue.id" +
       " WHERE ure.followerUserId = :userId")
   List<GetUserListResponseDto> getFollowerUserList(Long userId);
 }

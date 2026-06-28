@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface JpaUserRelationRepository extends JpaRepository<UserRelationEntity, UserRelationId> {
-@Query(" SELECT ure.followingUserId" +
-    " FROM UserRelationEntity ure" +
-    " WHERE ure.followerUserId = :userId")
+  @Query(" SELECT ure.followingUserId" +
+      " FROM UserRelationEntity ure" +
+      " WHERE ure.followerUserId = :userId")
   List<Long> findFollowers(Long userId);
 }
