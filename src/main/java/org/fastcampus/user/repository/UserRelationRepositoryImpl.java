@@ -6,7 +6,7 @@ import org.fastcampus.user.application.interfaces.UserRelationRepository;
 import org.fastcampus.user.domain.User;
 import org.fastcampus.user.repository.entity.UserEntity;
 import org.fastcampus.user.repository.entity.UserRelationEntity;
-import org.fastcampus.user.repository.entity.UserRelationIdEntity;
+import org.fastcampus.user.repository.entity.UserRelationId;
 import org.fastcampus.user.repository.jpa.JpaUserRelationRepository;
 import org.fastcampus.user.repository.jpa.JpaUserRepository;
 import org.springframework.stereotype.Repository;
@@ -21,7 +21,7 @@ public class UserRelationRepositoryImpl implements UserRelationRepository {
 
   @Override
   public boolean isAlreadyFollow(User user, User targetUser) {
-    UserRelationIdEntity id = new UserRelationIdEntity(user.getId(), targetUser.getId());
+    UserRelationId id = new UserRelationId(user.getId(), targetUser.getId());
     return jpaUserRelationRepository.existsById(id);
   }
 
@@ -36,7 +36,7 @@ public class UserRelationRepositoryImpl implements UserRelationRepository {
   @Override
   @Transactional
   public void delete(User user, User targetUser) {
-    UserRelationIdEntity id = new UserRelationIdEntity(user.getId(), targetUser.getId());
+    UserRelationId id = new UserRelationId(user.getId(), targetUser.getId());
     jpaUserRelationRepository.deleteById(id);
     jpaUserRepository.saveAll((List.of(new UserEntity(user), new UserEntity(targetUser))));
   }

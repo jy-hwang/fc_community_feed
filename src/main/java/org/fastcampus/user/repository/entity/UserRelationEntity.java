@@ -14,7 +14,7 @@ import org.fastcampus.common.repository.entity.TimeBaseEntity;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-@IdClass(UserRelationIdEntity.class)
+@IdClass(UserRelationId.class)
 public class UserRelationEntity extends TimeBaseEntity {
   @Id
   private Long followingUserId;
