@@ -1,5 +1,6 @@
 package org.fastcampus.post.repository.post_queue;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.fastcampus.post.repository.entity.post.PostEntity;
 import org.fastcampus.post.repository.entity.post.UserPostQueueEntity;
@@ -19,6 +20,7 @@ public class UserPostQueueCommandRepositoryImpl implements UserPostQueueCommandR
   private final JpaUserPostQueueRepository jpaUserPostQueueRepository;
 
   @Override
+  @Transactional
   public void publishPost(PostEntity postEntity) {
     UserEntity userEntity = postEntity.getAuthor();
     List<Long> followerIds = jpaUserRelationRepository.findFollowers(userEntity.getId());
@@ -32,6 +34,7 @@ public class UserPostQueueCommandRepositoryImpl implements UserPostQueueCommandR
   }
 
   @Override
+  @Transactional
   public void saveFollowPost(Long userId, Long targetId) {
     List<Long> postIdList = jpaPostRepository.findAllPostIdsByAuthorId(targetId);
 
@@ -44,6 +47,7 @@ public class UserPostQueueCommandRepositoryImpl implements UserPostQueueCommandR
   }
 
   @Override
+  @Transactional
   public void deleteFollowPost(Long userId, Long targetId) {
     jpaUserPostQueueRepository.deleteAllByUserIdAndAuthorId(userId, targetId);
   }
