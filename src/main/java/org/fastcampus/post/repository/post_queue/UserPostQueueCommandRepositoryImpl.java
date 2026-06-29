@@ -33,11 +33,18 @@ public class UserPostQueueCommandRepositoryImpl implements UserPostQueueCommandR
 
   @Override
   public void saveFollowPost(Long userId, Long targetId) {
+    List<Long> postIdList = jpaPostRepository.findAllPostIdsByAuthorId(targetId);
 
+    List<UserPostQueueEntity> userPostQueueEntityList
+        = postIdList.stream()
+        .map(postId -> new UserPostQueueEntity(userId, postId, targetId))
+        .toList();
+
+    jpaUserPostQueueRepository.saveAll(userPostQueueEntityList);
   }
 
   @Override
   public void deleteFollowPost(Long userId, Long targetId) {
-
+    jpaUserPostQueueRepository.deleteAllByUserIdAndAuthorId(userId, targetId);
   }
 }
