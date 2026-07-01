@@ -9,7 +9,9 @@ import org.fastcampus.post.domain.Post;
 import org.fastcampus.post.domain.comment.Comment;
 import org.fastcampus.user.application.UserService;
 import org.fastcampus.user.domain.User;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CommentService {
   private final CommentRepository commentRepository;
   private final UserService userService;
@@ -24,7 +26,7 @@ public class CommentService {
   }
 
   public Comment getComment(Long commentId) {
-    return commentRepository.findById(commentId).orElseThrow(IllegalAccessError::new);
+    return commentRepository.findById(commentId);
   }
 
   public Comment createComment(CreateCommentRequestDto dto) {
@@ -35,8 +37,8 @@ public class CommentService {
     return commentRepository.save(comment);
   }
 
-  public Comment updateComment(UpdateCommentRequestDto dto) {
-    Comment comment = getComment(dto.commentId());
+  public Comment updateComment(Long commentId, UpdateCommentRequestDto dto) {
+    Comment comment = getComment(commentId);
     User user = userService.getUser(dto.userId());
 
     comment.updateComment(user, dto.content());

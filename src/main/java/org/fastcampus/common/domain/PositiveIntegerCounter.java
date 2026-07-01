@@ -4,7 +4,7 @@ public class PositiveIntegerCounter {
   private int count;
 
   public PositiveIntegerCounter() {
-    this.count = 0;
+    this(0);
   }
 
   public PositiveIntegerCounter(int count) {

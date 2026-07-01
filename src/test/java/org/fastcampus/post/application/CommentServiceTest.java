@@ -20,13 +20,13 @@ public class CommentServiceTest extends PostApplicationTestTemplate {
   }
 
   @Test
-  void givenCreateComment_whenUpdateCommment_thenReturnUpdatedComment() {
+  void givenCreateComment_whenUpdateComment_thenReturnUpdatedComment() {
     // given
     Comment comment = commentService.createComment(commentRequestDto);
 
     // when
-    UpdateCommentRequestDto updateCommentRequestDto = new UpdateCommentRequestDto(comment.getId(), user.getId(), "updated comment");
-    Comment updatedComment = commentService.updateComment(updateCommentRequestDto);
+    UpdateCommentRequestDto updateCommentRequestDto = new UpdateCommentRequestDto(user.getId(), "updated comment");
+    Comment updatedComment = commentService.updateComment(comment.getId(), updateCommentRequestDto);
 
     // then
     assertEquals(comment.getId(), updatedComment.getId());
