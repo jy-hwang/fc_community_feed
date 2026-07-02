@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class SignUpAcceptanceTest extends AcceptanceTestTemplate {
-  private final String email ="email-user@example.com";
+  private final String email = "email-user@example.com";
 
   @BeforeEach
   void setup() {
@@ -18,7 +18,7 @@ class SignUpAcceptanceTest extends AcceptanceTestTemplate {
   }
 
   @Test
-  void givenEmail_whenSendEmail_thenVerificationTokenSaved(){
+  void givenEmail_whenSendEmail_thenVerificationTokenSaved() {
     // given
     SendEmailRequestDto dto = new SendEmailRequestDto(email);
 
@@ -29,5 +29,19 @@ class SignUpAcceptanceTest extends AcceptanceTestTemplate {
     String token = this.getEmailToken(email);
     assertNotNull(token);
     assertEquals(0, code);
+  }
+
+  @Test
+  void givenInvalidEmail_whenSendEmail_thenVerificationTokenNotSaved() {
+    // given
+    SendEmailRequestDto dto = new SendEmailRequestDto("abcd");
+
+    // when
+    Integer code = requestSendEmail(dto);
+
+    // then
+    String token = this.getEmailToken(email);
+    assertNotNull(code);
+    assertEquals(500, code);
   }
 }
