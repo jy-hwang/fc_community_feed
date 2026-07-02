@@ -19,9 +19,9 @@ public interface JpaPostRepository extends JpaRepository<PostEntity, Long> {
 
   @Modifying
   @Query(value = " UPDATE PostEntity pe " +
-      " SET pe.likeCount = p.likeCount + :likeCount} " +
+      " SET pe.likeCount = pe.likeCount + :likeCount " +
       ", pe.uptDt = now() " +
-      " WHERE pe.id = :postId} ")
+      " WHERE pe.id = :postId ")
   void updateLikeCount(Long postId, Integer likeCount);
 
   @Modifying
@@ -31,6 +31,6 @@ public interface JpaPostRepository extends JpaRepository<PostEntity, Long> {
       " WHERE pe.id = :id ")
   void increaseCommentCount(Long id);
 
-  @Query("SELECT pe.id FROM PostEntity pe WHERE pe.author.id = :authorId")
-  List<Long> findAllPostIdsByAuthorId(Long authorId);
+  @Query("SELECT pe FROM PostEntity pe WHERE pe.author.id = :authorId")
+  List<PostEntity> findAllPostIdsByAuthorId(Long authorId);
 }

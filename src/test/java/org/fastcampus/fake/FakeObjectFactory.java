@@ -7,7 +7,7 @@ import org.fastcampus.post.application.interfaces.LikeRepository;
 import org.fastcampus.post.application.interfaces.PostRepository;
 import org.fastcampus.post.repository.FakeCommentRepository;
 import org.fastcampus.post.repository.FakePostRepository;
-import org.fastcampus.user.application.FakeLikeRepository;
+import org.fastcampus.post.repository.FakeLikeRepository;
 import org.fastcampus.user.application.UserRelationService;
 import org.fastcampus.user.application.UserService;
 import org.fastcampus.user.application.interfaces.UserRelationRepository;
