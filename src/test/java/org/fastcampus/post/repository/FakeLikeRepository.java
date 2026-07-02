@@ -1,4 +1,4 @@
-package org.fastcampus.user.application;
+package org.fastcampus.post.repository;
 
 import org.fastcampus.post.application.interfaces.LikeRepository;
 import org.fastcampus.post.domain.Post;
