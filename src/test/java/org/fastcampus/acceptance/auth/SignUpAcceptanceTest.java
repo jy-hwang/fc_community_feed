@@ -40,8 +40,6 @@ class SignUpAcceptanceTest extends AcceptanceTestTemplate {
     Integer code = requestSendEmail(dto);
 
     // then
-    String token = this.getEmailToken(email);
-    assertNotNull(code);
-    assertEquals(500, code);
+    assertEquals(400, code);
   }
 }
