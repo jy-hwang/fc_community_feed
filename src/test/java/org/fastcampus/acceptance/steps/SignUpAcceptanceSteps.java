@@ -16,4 +16,16 @@ public class SignUpAcceptanceSteps {
         .extract()
         .jsonPath().get("code");
   }
+
+  public static Integer requestVerifyEmail(String email, String token) {
+    return RestAssured
+        .given()
+        .queryParam("email", email)
+        .queryParam("token", token)
+        .when()
+        .get("/signup/verify-token")
+        .then()
+        .extract()
+        .jsonPath().get("code");
+  }
 }

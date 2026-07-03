@@ -20,11 +20,15 @@ public class AcceptanceTestTemplate {
     loader.loadData();
   }
 
-  protected void cleanUp(){
+  protected void cleanUp() {
     cleanUp.execute();
   }
 
   protected String getEmailToken(String email) {
     return loader.getEmailToken(email);
+  }
+
+  protected boolean isEmailVerified(String email) {
+    return loader.isEmailVerified(email);
   }
 }
