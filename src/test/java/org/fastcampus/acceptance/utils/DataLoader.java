@@ -33,8 +33,15 @@ public class DataLoader {
 
   public boolean isEmailVerified(String email) {
     return entityManager
-        .createQuery(" select isVerified from EmailVerificationEntity where email = :email", Boolean.class)
+        .createQuery(" SELECT isVerified FROM EmailVerificationEntity WHERE email = :email", Boolean.class)
         .setParameter("email", email)
+        .getSingleResult();
+  }
+
+  public Long getUserId(String email) {
+    return (Long) entityManager
+        .createNativeQuery(" SELECT userId FROM community_user_auth WHERE email = ? ", Long.class)
+        .setParameter(1, email)
         .getSingleResult();
   }
 }

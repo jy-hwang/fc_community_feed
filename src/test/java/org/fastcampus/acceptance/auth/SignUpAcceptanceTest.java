@@ -1,12 +1,12 @@
 package org.fastcampus.acceptance.auth;
 
 import org.fastcampus.acceptance.utils.AcceptanceTestTemplate;
+import org.fastcampus.auth.application.dto.CreateUserAuthRequestDto;
 import org.fastcampus.auth.application.dto.SendEmailRequestDto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.fastcampus.acceptance.steps.SignUpAcceptanceSteps.requestSendEmail;
-import static org.fastcampus.acceptance.steps.SignUpAcceptanceSteps.requestVerifyEmail;
+import static org.fastcampus.acceptance.steps.SignUpAcceptanceSteps.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class SignUpAcceptanceTest extends AcceptanceTestTemplate {
@@ -98,4 +98,33 @@ class SignUpAcceptanceTest extends AcceptanceTestTemplate {
     assertEquals(500, code);
   }
 
+  @Test
+  void givenVerifiedEmail_whenRegister_thenUserRegistered() {
+    // given
+    requestSendEmail(new SendEmailRequestDto(email));
+    String token = getEmailToken(email);
+    requestVerifyEmail(email, token);
+
+    // when
+    CreateUserAuthRequestDto dto = new CreateUserAuthRequestDto(email, "password", "USER", "name", "profileImageUrl");
+    Integer code = registerUser(dto);
+
+    // then
+    assertEquals(0, code);
+    Long userId = getUserId(email);
+    assertEquals(1L, userId);
+  }
+
+  @Test
+  void givenUnverifiedSendEmail_whenRegister_thenThrowError() {
+    // given
+    requestSendEmail(new SendEmailRequestDto(email));
+
+    // when
+    CreateUserAuthRequestDto dto = new CreateUserAuthRequestDto(email, "password", "USER", "name", "profileImageUrl");
+    Integer code = registerUser(dto);
+
+    // then
+    assertEquals(400, code);
+  }
 }
