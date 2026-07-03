@@ -1,4 +1,4 @@
-package org.fastcampus.acceptance.auth;
+package org.fastcampus.auth;
 
 import org.fastcampus.auth.domain.Email;
 import org.junit.jupiter.params.ParameterizedTest;
