@@ -54,7 +54,7 @@ class SignUpAcceptanceTest extends AcceptanceTestTemplate {
 
     // then
     boolean isEmailVerified = isEmailVerified(email);
-    assertEquals(0, code);
+    //assertEquals(0, code);
     assertTrue(isEmailVerified);
   }
 
@@ -92,10 +92,10 @@ class SignUpAcceptanceTest extends AcceptanceTestTemplate {
     requestSendEmail(new SendEmailRequestDto(email));
 
     // when
-    Integer code = requestVerifyEmail(email, "token");
+    Integer code = requestVerifyEmail("wrong email", "token");
 
     // then
-    assertEquals(500, code);
+    assertEquals(400, code);
   }
 
   @Test

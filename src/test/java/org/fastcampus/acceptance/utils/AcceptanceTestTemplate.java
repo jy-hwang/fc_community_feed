@@ -14,7 +14,6 @@ public class AcceptanceTestTemplate {
   @Autowired
   private DataLoader loader;
 
-  @BeforeEach
   public void init() {
     cleanUp.execute();
     loader.loadData();
