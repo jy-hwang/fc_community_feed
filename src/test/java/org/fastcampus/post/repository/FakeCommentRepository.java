@@ -5,7 +5,6 @@ import org.fastcampus.post.domain.comment.Comment;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class FakeCommentRepository implements CommentRepository {
   private final Map<Long, Comment> store = new HashMap<>();

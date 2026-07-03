@@ -1,6 +1,5 @@
 package org.fastcampus.post.repository;
 
-import org.fastcampus.post.domain.Post;
 import org.fastcampus.post.repository.entity.post.PostEntity;
 import org.fastcampus.post.repository.post_queue.UserQueueRedisRepository;
 import org.springframework.context.annotation.Profile;
@@ -40,7 +39,7 @@ public class FakeUserQueueRedisRepository implements UserQueueRedisRepository {
     }
   }
 
-  public List<PostEntity> getPostListByUserId(Long userId){
+  public List<PostEntity> getPostListByUserId(Long userId) {
     return List.copyOf(queue.get(userId));
   }
 }

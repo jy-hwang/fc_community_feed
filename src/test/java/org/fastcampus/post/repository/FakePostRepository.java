@@ -5,7 +5,6 @@ import org.fastcampus.post.domain.Post;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
 
 public class FakePostRepository implements PostRepository {
   private final Map<Long, Post> store = new HashMap<>();

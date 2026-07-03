@@ -1,6 +1,5 @@
 package org.fastcampus.post.repository.post_queue;
 
-import lombok.extern.java.Log;
 import org.fastcampus.post.repository.entity.post.PostEntity;
 
 import java.util.List;

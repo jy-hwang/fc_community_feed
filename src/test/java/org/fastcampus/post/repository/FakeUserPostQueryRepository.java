@@ -1,6 +1,5 @@
 package org.fastcampus.post.repository;
 
-import lombok.RequiredArgsConstructor;
 import org.fastcampus.post.repository.entity.post.PostEntity;
 import org.fastcampus.post.repository.post_queue.UserPostQueueQueryRepository;
 import org.fastcampus.post.ui.dto.GetPostContentResponseDto;

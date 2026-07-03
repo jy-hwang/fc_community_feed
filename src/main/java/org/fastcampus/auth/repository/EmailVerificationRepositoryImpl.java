@@ -47,7 +47,7 @@ public class EmailVerificationRepositoryImpl implements EmailVerificationReposit
         .findByEmail(emailAddress)
         .orElseThrow(() -> new IllegalArgumentException("인증 요청하지 않은 이메일입니다."));
 
-    if(entity.isVerified()) {
+    if (entity.isVerified()) {
       throw new IllegalArgumentException("이미 인증된 이메일 입니다.");
     }
 
