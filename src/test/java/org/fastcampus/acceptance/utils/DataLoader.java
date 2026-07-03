@@ -2,11 +2,12 @@ package org.fastcampus.acceptance.utils;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
-import org.fastcampus.user.application.dto.CreateUserRequestDto;
+import org.fastcampus.auth.application.dto.CreateUserAuthRequestDto;
+import org.fastcampus.auth.application.dto.SendEmailRequestDto;
 import org.fastcampus.user.application.dto.FollowUserRequestDto;
 import org.springframework.stereotype.Component;
 
-import static org.fastcampus.acceptance.steps.UserAcceptanceSteps.createUser;
+import static org.fastcampus.acceptance.steps.SignUpAcceptanceSteps.*;
 import static org.fastcampus.acceptance.steps.UserAcceptanceSteps.followUser;
 
 @Component
@@ -15,9 +16,10 @@ public class DataLoader {
   private EntityManager entityManager;
 
   public void loadData() {
-    createUser(new CreateUserRequestDto("test user1", ""));
-    createUser(new CreateUserRequestDto("test user2", ""));
-    createUser(new CreateUserRequestDto("test user3", ""));
+    // user 1, 2, 3 생성
+    for (int i = 1; i < 4; i++) {
+      createUser("user" + i + "@test.com");
+    }
 
     followUser(new FollowUserRequestDto(1L, 2L));
     followUser(new FollowUserRequestDto(1L, 3L));
@@ -43,5 +45,12 @@ public class DataLoader {
         .createQuery(" SELECT userId FROM UserAuthEntity WHERE email = :email", Long.class)
         .setParameter("email", email)
         .getSingleResult();
+  }
+
+  public void createUser(String email) {
+    requestSendEmail(new SendEmailRequestDto(email));
+    String token = getEmailToken(email);
+    requestVerifyEmail(email, token);
+    registerUser(new CreateUserAuthRequestDto(email, "password", "USER", "name", ""));
   }
 }
