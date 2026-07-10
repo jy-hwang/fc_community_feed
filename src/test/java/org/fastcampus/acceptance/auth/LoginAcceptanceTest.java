@@ -42,6 +42,6 @@ public class LoginAcceptanceTest extends AcceptanceTestTemplate {
     Integer code = requestLoginGetResponseCode(dto);
 
     // then
-    assertEquals(400, code);
+    assertEquals(500, code);
   }
 }

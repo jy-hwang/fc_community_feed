@@ -22,4 +22,15 @@ public class UserAuthRepositoryImpl implements UserAuthRepository {
     userAuthEntity = jpaUserAuthRepository.save(userAuthEntity);
     return userAuthEntity.toUserAuth();
   }
+
+  @Override
+  public UserAuth loginUser(String email, String password) {
+    UserAuthEntity userAuthEntity = jpaUserAuthRepository.findByEmail(email).orElseThrow();
+    UserAuth userAuth = userAuthEntity.toUserAuth();
+
+    if(!userAuth.matchPassword(password)){
+      throw new IllegalArgumentException("비밀번호 또는 아이디가 일치하지 않습니다.");
+    }
+    return userAuth;
+  }
 }
