@@ -17,3 +17,5 @@ spring:
 logging:
   level:
     org.hibernate.orm.jdbc.bind: trace
+
+secret-key: ${SECRET_KEY}
