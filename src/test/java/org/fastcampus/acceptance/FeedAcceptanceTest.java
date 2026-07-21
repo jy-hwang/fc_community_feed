@@ -45,10 +45,6 @@ public class FeedAcceptanceTest extends AcceptanceTestTemplate {
 
   @Test
   void givenUserHasFollowerAndCreatePost_whenFollowerUserRequestFeedWithInvalidToken_thenFollowerCannotGetPostFromFeed() {
-    // given
-    CreatePostRequestDto dto = new CreatePostRequestDto(2L, "user 1 can get this post", PostPublicationState.PUBLIC);
-    Long createdPostId = requestCreatePost(dto);
-
     // when, 팔로워 피드를 요청
     Integer code = requestFeedCode(token);
 
